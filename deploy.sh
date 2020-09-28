@@ -28,7 +28,7 @@ mysql> exit
 sudo add-apt-repository ppa:ondrej/php
 sudo update
 sudo apt upgrade
-sudo apt install php7.3 libapache2-mod-php7.3 php7.3-mysql php7.3-cli php7.3-fpm php7.3-json php7.3-pdo php7.3-mysql php7.3-zip php7.3-gd php7.3-mbstring php7.3-curl php7.3-xml php7.3-bcmath php7.3-json
+sudo apt install php7.3 libapache2-mod-php7.3 php7.3-mysql php7.3-common php7.3-cli php7.3-fpm php7.3-pdo php7.3-mysql php7.3-zip php7.3-gd php7.3-mbstring php7.3-curl php7.3-bcmath php7.3-json php7.3-xml php7.3-xmlrpc php7.3-gd php7.3-imagick php7.3-dev php7.3-imap php7.3-opcache php7.3-soap php7.3-zip php7.3-intl -y
 
 # Configure Apache2 
 sudo nano /etc/apache2/mods-enabled/dir.conf
@@ -44,12 +44,62 @@ sudo systemctl status apache2
 sudo service apache2 status
 
 # Configure PHP
+sudo nano /etc/php/7.3/apache2/php.ini
+
+upload_max_filesize = 32M 
+post_max_size = 48M 
+memory_limit = 256M 
+max_execution_time = 600 
+max_input_vars = 3000 
+max_input_time = 1000
+
+# Test PHP
+sudo nano /var/www/html/info.php
+
+<?php
+phpinfo();
+?>
+
+http://localhost/info.php
+
+sudo rm /var/www/html/info.php
 
 
 # Install ZendServer
 
+sudo ./install_zs.sh --automatic
+
+echo 'export PATH=$PATH:/usr/local/zend/bin' >> $HOME/.bashrc
+echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/zend/lib' >> $HOME/.bashrc
+
+# Uninstall zendServer
+sudo /usr/local/zend/bin/uninstall.sh
+
+# Manually Uninstall zendServer
+sudo apt-get remove `dpkg -l | grep zend | grep ^ii | awk '{print $2}'`
+sudo apt-get purge `dpkg -l | grep zend | awk '{print $2}'`
+
 # Install Composer
 
-# Install NodeJS
+sudo apt update
+cd ~
+curl -sS https://getcomposer.org/installer -o composer-setup.php
+
+https://composer.github.io/pubkeys.html
+
+HASH=<544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061>
+
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+
+sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+
+# Install NVM
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+source ~/.profile 
+source ~/.bashrc
+nvm ls-remote
+
+# Install NodeJS v12
+nvm install v12.18.2
 
 
