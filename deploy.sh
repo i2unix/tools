@@ -1,5 +1,6 @@
-# Deploying Bash Script
+#!/bin/sh
 
+# Deploying Bash Script
 
 # Install utils
 sudo apt install git mc curl zip unzip -y
@@ -53,8 +54,10 @@ max_execution_time = 600
 max_input_vars = 3000 
 max_input_time = 1000
 
+sudo systemctl restart apache2
+
 # Test PHP
-sudo nano /var/www/html/info.php
+nano /var/www/html/info.php
 
 <?php
 phpinfo();
@@ -62,12 +65,16 @@ phpinfo();
 
 http://localhost/info.php
 
-sudo rm /var/www/html/info.php
+rm /var/www/html/info.php
+
+echo '<?php phpinfo(); ?>' >> /var/www/html/info.php
 
 
 # Install ZendServer
 
 sudo ./install_zs.sh --automatic
+
+sudo ./install_zs.sh 7.3
 
 echo 'export PATH=$PATH:/usr/local/zend/bin' >> $HOME/.bashrc
 echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/zend/lib' >> $HOME/.bashrc
@@ -87,7 +94,7 @@ curl -sS https://getcomposer.org/installer -o composer-setup.php
 
 https://composer.github.io/pubkeys.html
 
-HASH=<544e09ee996cdf60ece3804abc52599c22b1f40f4323403c44d44fdfdd586475ca9813a858088ffbc1f233e9b180f061>
+HASH=<795f976fe0ebd8b75f26a6dd68f78fd3453ce79f32ecb33e7fd087d39bfeb978342fb73ac986cd4f54edd0dc902601dc>
 
 php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 
@@ -102,4 +109,5 @@ nvm ls-remote
 # Install NodeJS v12
 nvm install v12.18.2
 
+# Install PHP phpstorm
 
