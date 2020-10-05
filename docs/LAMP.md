@@ -53,11 +53,11 @@ $ sudo apt install php7.3 libapache2-mod-php7.3 php7.3-mysql php7.3-common php7.
 
 ### Configure Apache2 
 ```bash
-$ sudo nano /etc/apache2/mods-enabled/dir.con
+$ sudo nano /etc/apache2/mods-enabled/dir.conf
 ```
 
 ```text
-<IfModule mod_dir.c\>
+<IfModule mod_dir.c>
     DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 </IfModule>
 ```
