@@ -120,9 +120,9 @@ $ curl -sS https://getcomposer.org/installer -o composer-setup.php
 ##### Go to link and
 > https://composer.github.io/pubkeys.html
 
-##### set your hash: `HASH=<your hash>`
+##### set composer hash: `HASH=<composer hash>`
 ```text
-HASH=<795f976fe0ebd8b75f26a6dd68f78fd3453ce79f32ecb33e7fd087d39bfeb978342fb73ac986cd4f54edd0dc902601dc>
+HASH=795f976fe0ebd8b75f26a6dd68f78fd3453ce79f32ecb33e7fd087d39bfeb978342fb73ac986cd4f54edd0dc902601dc
 ```
 
 ```bash
