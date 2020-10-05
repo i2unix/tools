@@ -1,2 +1,2 @@
-# tools
-Dev Tools
+### Tools
+- [Install LAMP](docs/LAMP.md)
