@@ -142,7 +142,7 @@ $ nvm ls-remote
 
 #### Install NodeJS v12
 ```sh
-$ nvm install v12.18.2
+$ nvm install v12.18.4
 ```
 
 ---
