@@ -22,7 +22,7 @@ $ sudo chown -R $USER:www-data /var/www
 
 ---
 
-### Install  Mysql Server
+### Install Mysql Server
 ```sh
 $ sudo apt install mysql-server
 $ sudo mysql_secure_installation
@@ -39,6 +39,10 @@ mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'p
 mysql> FLUSH PRIVILEGES;
 mysql> SELECT user,authentication_string,plugin,host FROM mysql.user;
 mysql> exit
+```
+### Load Time Zones
+```sh
+$ mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root -p mysql
 ```
 
 ---
