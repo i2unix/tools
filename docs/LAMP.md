@@ -3,33 +3,33 @@
 ---
 
 ### Install utils
-```bash
+```sh
 $ sudo apt install git mc curl zip unzip -y
 ```
 
 ---
 
 ### Install Apache2.4 Web Server
-```bash
+```sh
 $ sudo apt update
 $ sudo apt install apache2
 ```
 
 ### Add current user to server group "www-data"
-```bash
+```sh
 $ sudo chown -R $USER:www-data /var/www
 ```
 
 ---
 
 ### Install  Mysql Server
-```bash
+```sh
 $ sudo apt install mysql-server
 $ sudo mysql_secure_installation
 ```
 
 ### Configure root mysql user
-```bash
+```sh
 $ sudo mysql
 ```
 
@@ -44,7 +44,7 @@ mysql> exit
 ---
 
 ### Install PHP
-```bash
+```sh
 $ sudo add-apt-repository ppa:ondrej/php
 $ sudo apt update
 $ sudo apt upgrade
@@ -52,7 +52,7 @@ $ sudo apt install php7.3 libapache2-mod-php7.3 php7.3-mysql php7.3-common php7.
 ```
 
 ### Configure Apache2 
-```bash
+```sh
 $ sudo nano /etc/apache2/mods-enabled/dir.conf
 ```
 
@@ -63,17 +63,17 @@ $ sudo nano /etc/apache2/mods-enabled/dir.conf
 ```
 
 #### restart Apache2
-```bash
+```sh
 $ sudo systemctl restart apache2
 ```
 
 #### Check Apache2 status
-```bash
+```sh
 $ sudo systemctl status apache2
 ```
 
 ### Configure PHP
-```bash
+```sh
 $ sudo nano /etc/php/7.3/apache2/php.ini
 ```
 
@@ -87,12 +87,12 @@ max_input_time = 1000
 ```
 
 #### restart Apache2
-```bash
+```sh
 $ sudo systemctl restart apache2
 ```
 
 ### Test PHP
-```bash
+```sh
 $ nano /var/www/html/info.php
 ```
 
@@ -104,14 +104,14 @@ $ nano /var/www/html/info.php
 
 > http://localhost/info.php
 
-```bash
+```sh
 $ rm /var/www/html/info.php
 ```
 
 ---
 
 ### Install Composer
-```bash
+```sh
 $ sudo apt update
 $ cd ~
 $ curl -sS https://getcomposer.org/installer -o composer-setup.php
@@ -125,7 +125,7 @@ $ curl -sS https://getcomposer.org/installer -o composer-setup.php
 HASH=795f976fe0ebd8b75f26a6dd68f78fd3453ce79f32ecb33e7fd087d39bfeb978342fb73ac986cd4f54edd0dc902601dc
 ```
 
-```bash
+```sh
 $ php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 $ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 ```
@@ -133,7 +133,7 @@ $ sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 ---
 
 ### Install NVM
-```bash
+```sh
 $ curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 $ source ~/.profile 
 $ source ~/.bashrc
@@ -141,27 +141,31 @@ $ nvm ls-remote
 ```
 
 #### Install NodeJS v12
-```bash
+```sh
 $ nvm install v12.18.2
 ```
 
 ---
 
 ### Install ZendServer (PHP 7.3)
-```bash
+```sh
 $ sudo ./install_zs.sh 7.3
 ```
 #### Post install ZendServer (PHP 7.3)
-```bash
+```sh
 $ echo 'export PATH=$PATH:/usr/local/zend/bin' >> $HOME/.bashrc
 $ echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/zend/lib' >> $HOME/.bashrc
 ```
 ### Uninstall zendServer
-```bash
+```sh
 $ sudo /usr/local/zend/bin/uninstall.sh
 ```
 ### Manually Uninstall zendServer
-```bash
+```sh
 $ sudo apt-get remove `dpkg -l | grep zend | grep ^ii | awk '{print $2}'`
 $ sudo apt-get purge `dpkg -l | grep zend | awk '{print $2}'`
+```
+#### Set ZendServer PHP to Alternatives
+```sh
+$ sudo update-alternatives --install /usr/bin/php php /usr/local/zend/php/active/bin/php 1
 ```
