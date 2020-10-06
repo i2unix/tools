@@ -168,4 +168,5 @@ $ sudo apt-get purge `dpkg -l | grep zend | awk '{print $2}'`
 #### Set ZendServer PHP to Alternatives
 ```sh
 $ sudo update-alternatives --install /usr/bin/php php /usr/local/zend/php/active/bin/php 1
+$ php -i | grep "Loaded Configuration File"
 ```
